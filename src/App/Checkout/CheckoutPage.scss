@@ -1,0 +1,117 @@
+.checkout-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+  .checkout-page__container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    .checkout-page__billing {
+      width: 65%;
+      border: 1px solid var(--borderColor);
+      border-radius: 10px;
+      padding: 40px;
+      .checkout-page__billing-title {
+        width: 100%;
+        font-size: 15px;
+        font-family: "Dosis", serif;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      .checkout-page__billing-form {
+        form {
+          .checkout-page__billing-form-note {
+            .checkout-page__billing-form-note-input {
+              border: 1px solid var(--borderColor);
+              padding: 20px;
+              margin-top: 5px;
+              outline: none;
+              background-color: var(--input-background);
+            }
+          }
+        }
+      }
+    }
+    .checkout-page__order {
+      width: 30%;
+      height: fit-content;
+      border: 2px solid var(--primary-color);
+      border-radius: 10px;
+      padding: 30px;
+      .checkout-page__order-title {
+        width: 100%;
+        font-size: 15px;
+        font-family: "Dosis", serif;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      .checkout-page__order-list {
+        width: 100%;
+        .checkout-page__order-list-header {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          color: var(--greyColor);
+          font-weight: 500;
+        }
+        .checkout-page__order-list-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 10px;
+          padding: 10px 0;
+          .product-name {
+            width: 60%;
+          }
+          .product-price {
+            width: 30%;
+            text-align: end;
+          }
+        }
+        .checkout-page__order-list-total {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .title {
+            font-size: 15px;
+            font-weight: 600;
+          }
+          .total-price {
+            font-size: 17px;
+            font-weight: 600;
+          }
+        }
+      }
+      .checkout-page__order-payment-method {
+        width: 100%;
+        .ant-radio-wrapper {
+          display: block;
+        }
+      }
+      .checkout-page__order-policy {
+        width: 100%;
+        margin: 10px 0;
+        padding: 10px 0;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--black-text);
+        a {
+          color: var(--red-color);
+          text-decoration: underline;
+        }
+      }
+      .checkout-page__order-btn {
+        width: 100%;
+        background-color: var(--red-color);
+        padding: 15px 25px;
+        color: #fff;
+        text-align: center;
+        border-radius: 10px;
+      }
+    }
+  }
+}

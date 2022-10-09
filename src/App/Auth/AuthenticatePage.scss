@@ -1,0 +1,76 @@
+.authenticate-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 12px;
+  height: auto;
+  .authenticate-page__container {
+    width: 40%;
+    height: 70%;
+    max-width: 1200px;
+    display: flex;
+    padding: 60px;
+    border-radius: 5px;
+    border: 1px solid var(--borderColor);
+    form {
+      width: 100%;
+      .login-form,
+      .register-form {
+        margin-bottom: 20px;
+        width: 100%;
+        .authenticate-page__login-label,
+        .authenticate-page__register-label {
+          margin-bottom: 5px;
+        }
+        .input-form {
+          width: 100%;
+          border: 1px solid var(--borderColor);
+          border-radius: 10px;
+          padding: 10px 15px;
+          outline: none;
+          background-color: var(--input-background);
+        }
+      }
+      .authenticate-page__forgot-password {
+        margin-top: 20px;
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+      }
+      .register-form-terms {
+        padding: 15px 0;
+        font-size: 13px;
+        color: var(--greyDarkerColor);
+        span {
+          color: var(--red-color);
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+.ant-tabs-tab-btn {
+  color: var(--greyColor);
+  font-family: "Dosis", serif;
+  font-weight: 500;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--primary-color);
+}
+
+.ant-tabs-ink-bar {
+  height: 5px;
+  background: transparent !important;
+}
+
+.ant-tabs {
+  width: 100%;
+}
+.ant-tabs-nav-wrap {
+  justify-content: center;
+}

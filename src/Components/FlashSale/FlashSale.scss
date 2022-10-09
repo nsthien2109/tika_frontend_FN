@@ -1,0 +1,97 @@
+.flashsale {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .flashsale__container {
+    width: 100%;
+    margin: 0 12px;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .flashsale__header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .flashsale__header-title {
+        font-size: 20px;
+        font-weight: 300;
+        color: var(--primary-color);
+        margin-right: 20px;
+        span {
+          color: var(--red-color);
+          text-decoration: underline;
+          font-weight: 500;
+        }
+      }
+      .countdown-success {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--primary-color);
+      }
+      .countdown-time {
+        display: flex;
+        align-items: center;
+        .countdown-time-hour,
+        .countdown-time-min,
+        .countdown-time-sc {
+          width: 56px;
+          height: 56px;
+          font-size: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-family: "Dosis", sans-serif;
+          background-color: var(--red-color);
+          margin-right: 5px;
+          font-weight: 500;
+          color: var(--background-color);
+          border-radius: 10px;
+        }
+        span {
+          margin-right: 5px;
+        }
+      }
+      @media screen and (max-width: 550px) {
+        flex-direction: column;
+        .flashsale__header-countdown {
+          margin-top: 15px;
+        }
+      }
+    }
+    .flashsale__content {
+      margin-top: 20px;
+      height: auto;
+      width: 100%;
+      border: 2px solid var(--red-color);
+      border-radius: 15px;
+      .flashsale__content-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        .flashsale__content-item {
+          width: calc(100% / 5);
+          @media screen and (max-width: 1000px) {
+            width: calc(100% / 3);
+          }
+          @media screen and (max-width: 768px) {
+            width: calc(100% / 2);
+          }
+          @media screen and (max-width: 520px) {
+            width: calc(100% / 1);
+          }
+        }
+      }
+    }
+  }
+}
+
+.more-button-in {
+  -webkit-animation: more-button-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: more-button-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}

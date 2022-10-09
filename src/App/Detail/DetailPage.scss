@@ -1,0 +1,235 @@
+.detail-page {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  padding: 12px 12px 0 12px;
+  .detail-page__container {
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    .detail-page__overview {
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+      border-radius: 10px;
+      padding: 60px 40px;
+      display: flex;
+      margin-bottom: 50px;
+      flex-direction: column;
+      width: 100%;
+      .detail-page__overview-name {
+        width: 100%;
+        font-size: 24px;
+        font-weight: 600;
+      }
+      .detail-page__overview-info {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        .detail-page__overview-info-price {
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px;
+          .price {
+            font-size: 18px;
+            color: var(--greyColor);
+            text-decoration: line-through;
+            margin-right: 10px;
+          }
+          .sale-price {
+            font-family: "Dosis", serif;
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--red-color);
+          }
+        }
+        .detail-page__overview-info-stock {
+          margin-bottom: 30px;
+          font-family: "Dosis", serif;
+          color: var(--green-color);
+          font-size: 12px;
+          width: fit-content;
+          padding: 3px 5px;
+          border-radius: 5px;
+          font-weight: 600;
+          background-color: rgba(11, 158, 0, 0.1);
+        }
+        .detail-page__overview-add-cart {
+          margin-top: 30px;
+          width: 100%;
+          display: flex;
+          justify-content: start;
+          align-items: center;
+          .detail-page__overview-add-cart__counter {
+            width: 35%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 15px;
+            font-weight: 500;
+            .remove,
+            .add {
+              display: flex;
+              border-radius: 100%;
+              justify-content: center;
+              align-items: center;
+              width: 44px;
+              height: 44px;
+              cursor: pointer;
+              background-color: var(--input-background);
+            }
+          }
+          .detail-page__overview-cart-btn {
+            margin-left: 20px;
+            width: 50%;
+          }
+        }
+        .detail-page__overview_wishlist {
+          width: 50%;
+          margin-top: 20px;
+          padding: 5px 10px;
+          border-radius: 10px;
+          border: 1px solid var(--borderColor);
+          .detail-page__overview_wishlist-btn {
+            cursor: pointer;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-family: "Dosis", serif;
+            i {
+              margin-right: 10px;
+            }
+          }
+          &:hover {
+            background-color: var(--greyLighterColor);
+            opacity: 0.8;
+            color: #fff;
+          }
+        }
+        .detail-page__overview-checklist {
+          width: 100%;
+          margin-top: 20px;
+          .detail-page__overview-checklist-item {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+            i {
+              color: var(--green-color);
+            }
+          }
+        }
+        .detail-page__overview-checklist-socials {
+          width: 100%;
+          display: flex;
+          i {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 8px;
+            border-radius: 100%;
+            color: #fff;
+            cursor: pointer;
+          }
+        }
+      }
+      .detail-page__overview-img {
+        .swiper {
+          width: 240px;
+          height: 320px;
+        }
+
+        .swiper-slide {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 18px;
+          font-size: 22px;
+          font-weight: bold;
+          color: #fff;
+        }
+
+        .swiper-slide:nth-child(1n) {
+          background-color: rgb(206, 17, 17);
+        }
+
+        .swiper-slide:nth-child(2n) {
+          background-color: rgb(0, 140, 255);
+        }
+
+        .swiper-slide:nth-child(3n) {
+          background-color: rgb(10, 184, 111);
+        }
+
+        .swiper-slide:nth-child(4n) {
+          background-color: rgb(211, 122, 7);
+        }
+
+        .swiper-slide:nth-child(5n) {
+          background-color: rgb(118, 163, 12);
+        }
+
+        .swiper-slide:nth-child(6n) {
+          background-color: rgb(180, 10, 47);
+        }
+
+        .swiper-slide:nth-child(7n) {
+          background-color: rgb(35, 99, 19);
+        }
+
+        .swiper-slide:nth-child(8n) {
+          background-color: rgb(0, 68, 255);
+        }
+
+        .swiper-slide:nth-child(9n) {
+          background-color: rgb(218, 12, 218);
+        }
+
+        .swiper-slide:nth-child(10n) {
+          background-color: rgb(54, 94, 77);
+        }
+      }
+      .detail-page__overview-more {
+        height: 100%;
+        padding: 0 20px;
+        .detail-page__overview-more-content {
+          width: 100%;
+          height: fit-content;
+          padding: 30px;
+          display: flex;
+          border-radius: 10px;
+          flex-direction: column;
+          justify-content: start;
+          background-color: var(--input-background);
+          .detail-page__overview-more-content-item {
+            margin-bottom: 10px;
+            i {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 40px;
+              height: 40px;
+              font-size: 25px;
+              font-weight: 300;
+              margin-right: 20px;
+            }
+            p {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+    .detai-page-description {
+      margin-bottom: 50px;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+      border-radius: 10px;
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+}

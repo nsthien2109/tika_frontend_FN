@@ -1,0 +1,32 @@
+.btn-color-check {
+  width: fit-content;
+  width: 50px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 300;
+  margin-right: 15px;
+  position: relative;
+  cursor: pointer;
+  color: var(--background-color);
+  .btn-color-check__selected {
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    .btn-color-check__selected-content {
+      i {
+        width: 30%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0 4px 0 5px;
+        font-size: 10px;
+        color: var(--background-color);
+        background-color: var(--primary-color);
+      }
+    }
+  }
+}

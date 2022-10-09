@@ -1,0 +1,79 @@
+.filter {
+  width: 100%;
+  height: auto;
+  .filter__container {
+    width: 100%;
+    .filter__category,
+    .filter__brand {
+      padding: 20px;
+      width: 100%;
+      .filter__category-label,
+      .filter__brand-label {
+        font-size: 15px;
+        font-family: "Dosis", serif;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+      .ant-checkbox-group-item {
+        width: 100%;
+        font-size: 13px;
+        padding: 2px 0;
+        font-weight: 400;
+        color: var(--greyDarkerColor);
+      }
+    }
+    .filter__price {
+      padding: 20px;
+      width: 100%;
+      .filter__price-label {
+        font-size: 15px;
+        font-family: "Dosis", serif;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+      .filter__price-content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        .ant-slider-track {
+          position: absolute;
+          height: 4px;
+          background-color: #000000;
+          border-radius: 2px;
+          transition: background-color 0.3s;
+        }
+        .ant-slider-handle {
+          background-color: rgb(0, 0, 0);
+          border: solid 2px #000000;
+        }
+        .filter__price-content-sub {
+          display: flex;
+          justify-content: space-between;
+          .filter__price-content-sub-text {
+            font-size: 12px;
+            color: var(--greyDarkerColor);
+            span {
+              color: var(--black-text);
+              font-weight: 500;
+            }
+          }
+          .filter__price-content-sub-btn {
+            font-size: 13px;
+            text-transform: uppercase;
+            font-weight: 500;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    .filter__banner {
+      width: 100%;
+      padding: 20px;
+      img {
+        width: 100%;
+        object-fit: cover;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.tika__btn-big {
+  width: fit-content;
+  padding: 12px 20px;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--background-color);
+  font-size: 15px;
+  &:hover {
+    background-color: var(--primary-color);
+    opacity: 0.8;
+    cursor: pointer;
+  }
+}

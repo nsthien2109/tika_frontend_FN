@@ -1,0 +1,38 @@
+.slideshop-item {
+  width: 100%;
+  height: auto;
+  .slideshop-item__container {
+    width: 100%;
+    height: auto;
+    position: relative;
+    .slideshop-item-img {
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .slideshop-item-content {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px;
+      h3 {
+        font-size: 25px;
+        font-weight: 600;
+      }
+
+      .slideshop-item-content-btn {
+        margin-top: 15px;
+        background-color: var(--primary-color);
+        width: fit-content;
+        padding: 8px 10px;
+        border-radius: 10px;
+        color: var(--background-color);
+        font-weight: 500;
+      }
+    }
+  }
+}

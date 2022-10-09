@@ -1,0 +1,62 @@
+.detail-tabs {
+  width: 100%;
+  .description__content {
+    font-size: 15px;
+    color: var(--black-text);
+  }
+  .additonal-info__content {
+    width: 100%;
+    .additonal-info__content-item {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      .additonal-info__content-item__label,
+      .additonal-info__content-item__value {
+        width: 50%;
+        border: 0.03px solid var(--borderColor);
+        padding: 10px 20px;
+      }
+    }
+  }
+  .review__content {
+    width: 100%;
+    display: flex;
+    .review__content-body {
+      width: 50%;
+      padding: 0 20px;
+      .review__content-body-label {
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 16px;
+        font-family: "Dosis", serif;
+      }
+    }
+    .review__content-form {
+      width: 50%;
+      padding: 0 15px;
+      .review__content-form-label {
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 16px;
+        font-family: "Dosis", serif;
+        margin-bottom: 15px;
+      }
+      .review__content-form-rate {
+        margin: 20px 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .review__content-form-write {
+        margin-bottom: 20px;
+        .review__content-form-input {
+          margin-top: 10px;
+          width: 100%;
+          border-radius: 5px;
+          border: 1px solid var(--borderColor);
+          outline: none;
+          padding: 30px;
+        }
+      }
+    }
+  }
+}

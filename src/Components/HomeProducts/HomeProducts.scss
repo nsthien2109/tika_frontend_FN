@@ -1,0 +1,53 @@
+.home-products {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 12px;
+  margin-top: 20px;
+  .home-products__container {
+    width: 100%;
+    height: auto;
+    max-width: 1200px;
+    .home-products__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      .home-products__header-left {
+        .home-products__header-title {
+          font-size: 18px;
+          font-family: "Dosis", serif;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+        .home-products__header-subtitle {
+          font-size: 12px;
+          color: var(--greyDarkerColor);
+        }
+      }
+      .home-products__header-btn {
+        border: 1px solid var(--borderColor);
+        padding: 5px 10px;
+        border-radius: 10px;
+      }
+    }
+    .home-products-list {
+      width: 100%;
+    }
+    .home-products__bottom {
+      width: 100%;
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+      .home-products__bottom-btn {
+        background-color: var(--primary-color);
+        width: fit-content;
+        color: var(--background-color);
+        padding: 8px 10px;
+        font-weight: 500;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+}

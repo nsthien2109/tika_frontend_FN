@@ -1,0 +1,144 @@
+.sale-product-card {
+  width: 100%;
+  height: auto;
+  border: 0.05px solid var(--borderColor);
+  border-radius: 15px;
+  background-color: var(--background-color);
+  .sale-product-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .sale-product-img {
+      padding: 20px;
+      width: 100%;
+      position: relative;
+      img {
+        object-fit: cover;
+      }
+      .sale-product-img-percent {
+        position: absolute;
+        background-color: var(--secondary-color);
+        font-family: "Dosis", sans-serif;
+        font-weight: 500;
+        color: var(--background-color);
+        padding: 2px 8px;
+        border-radius: 5px;
+        top: 20px;
+        left: 20px;
+      }
+      .sale-product-img-more {
+        opacity: 0;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        .view-detail-btn,
+        .favorite-btn {
+          border: 1px solid var(--borderColor);
+          width: 40px;
+          height: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 100%;
+          margin-bottom: 5px;
+          i {
+            font-size: 15px;
+            font-weight: 300;
+          }
+          &:hover {
+            background-color: var(--primary-color);
+            color: var(--background-color);
+            cursor: pointer;
+            transition: 0.5s linear;
+          }
+        }
+      }
+    }
+    .sale-product-info {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .sale-product-info-price {
+        .price {
+          font-size: 16px;
+          text-decoration: line-through;
+          font-weight: 500;
+          color: var(--greyColor);
+          font-family: "Dosis", serif;
+          margin-right: 10px;
+        }
+        .sale-price {
+          font-size: 20px;
+          font-weight: 500;
+          color: var(--red-color);
+          font-family: "Dosis", serif;
+        }
+      }
+      .sale-product-info-name {
+        text-align: center;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .status {
+        color: var(--green-color);
+        font-size: 11px;
+        font-family: "Dosis", serif;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      .sale-product-info-star {
+        i {
+          color: var(--yellow-darker-color);
+        }
+      }
+      .sale-product-info-avalible {
+        font-size: 11px;
+        font-weight: 500;
+        span {
+          font-size: 20px;
+          font-family: "Dosis", serif;
+          font-weight: 600;
+          margin-left: 5px;
+          color: var(--primary-color);
+        }
+      }
+
+      .sale-product-info-cart {
+        opacity: 0;
+        height: 40px;
+        width: 100%;
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        .sale-product-info-cart-btn {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 60%;
+          border-radius: 20px;
+          cursor: pointer;
+          background-color: var(--red-color);
+          color: var(--background-color);
+        }
+      }
+    }
+  }
+  &:hover {
+    cursor: pointer;
+    animation: scale-animation 1s ease 0s 1 normal forwards;
+    border: 1px solid var(--borderColor);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    .sale-product-container > .sale-product-img > .sale-product-img-more {
+      -webkit-animation: more-button-in 0.5s
+        cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      animation: more-button-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    .sale-product-container > .sale-product-info > .sale-product-info-cart {
+      animation: cart-button-animation 1s ease 0s 1 normal forwards;
+    }
+  }
+}

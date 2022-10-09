@@ -1,0 +1,28 @@
+.profile-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 12px;
+  .profile-page__container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    .profile-page__dashboard {
+      width: 100%;
+      font-size: 14px;
+      span {
+        font-weight: 700;
+      }
+      a {
+        color: var(--secondary-color);
+        text-decoration: underline;
+      }
+    }
+    .profile-page__order {
+      width: 100%;
+    }
+    .profile-page__address {
+      width: 100%;
+    }
+  }
+}

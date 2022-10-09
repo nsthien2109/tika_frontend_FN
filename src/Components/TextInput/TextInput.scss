@@ -1,0 +1,13 @@
+.custom-text-input {
+  width: 100%;
+  margin-bottom: 20px;
+  .input-text {
+    margin-top: 5px;
+    padding: 10px 15px;
+    width: 100%;
+    border: 1px solid var(--borderColor);
+    background-color: var(--input-background);
+    outline: none;
+    border-radius: 5px;
+  }
+}

@@ -1,0 +1,63 @@
+.best-seller {
+  width: 100%;
+  height: auto;
+  padding: 0 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  .best-seller__container {
+    width: 100%;
+    max-width: 1200px;
+    .best-seller__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      .best-seller__header-left {
+        .best-seller__header-title {
+          font-size: 18px;
+          font-family: "Dosis", serif;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+        .best-seller__header-subtitle {
+          font-size: 12px;
+          color: var(--greyDarkerColor);
+        }
+      }
+      .best-seller__header-btn {
+        border: 1px solid var(--borderColor);
+        padding: 5px 10px;
+        border-radius: 10px;
+      }
+    }
+    .best-seller__content {
+      width: 100%;
+      height: auto;
+      .prev-arrow,
+      .next-arrow {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--borderColor);
+        top: calc(50% - 20px);
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--background-color);
+        font-size: 20px;
+        cursor: pointer;
+      }
+      .prev-arrow {
+        left: 10px;
+        z-index: 5;
+      }
+      .next-arrow {
+        right: 10px;
+        z-index: 5;
+      }
+    }
+  }
+}
