@@ -38,8 +38,8 @@ const DetailPage = (props) => {
               Brand : <span className="text-sm font-semibold">Chanel</span>
             </p>
           </div>
-          <div className="row flex justify-between items-center mt-3">
-            <div className="detail-page__overview-img w-1/2 lg:w-[40%]">
+          <div className="flex justify-between flex-col lg:flex-row items-center mt-3">
+            <div className="detail-page__overview-img w-full md:w-1/2 mb-5 lg:w-[40%]">
               <Swiper
                 effect={"cards"}
                 grabCursor={true}
@@ -56,7 +56,7 @@ const DetailPage = (props) => {
                 <SwiperSlide>Slide 9</SwiperSlide>
               </Swiper>
             </div>
-            <div className="detail-page__overview-info w-1/2 lg:w-[35%]">
+            <div className="detail-page__overview-info w-full md:w-1/2 lg:w-[35%]">
               <div className="detail-page__overview-info-price">
                 <div className="price">$9.35</div>
                 <div className="sale-price">$7.21</div>

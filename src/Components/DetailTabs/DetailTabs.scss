@@ -58,5 +58,12 @@
         }
       }
     }
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      .review__content-body,
+      .review__content-form {
+        width: 100%;
+      }
+    }
   }
 }
