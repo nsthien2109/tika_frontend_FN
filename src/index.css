@@ -97,7 +97,7 @@ body {
   }
   100% {
     opacity: 1;
-    right: -10px;
+    right: 10px;
   }
 }
 
@@ -116,10 +116,12 @@ body {
     opacity: 0;
     -webkit-transform: translateY(+40px);
     transform: translateY(+40px);
+    z-index: -5;
   }
   100% {
     opacity: 1;
     -webkit-transform: translateY(0);
     transform: translateY(0);
+    z-index: 30;
   }
 }

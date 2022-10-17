@@ -1,14 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./ProductCard.scss";
 import imgProduct from "../../Assets/imgProduct.jpg";
 
-const ProductCard = (props) => {
+const ProductCard = () => {
   return (
     <div className="product-card">
-      <div className="product-container">
+      <div className="product-card__container">
         <div className="product-img">
-          <img src={imgProduct} alt="" />
+          <img src={imgProduct} width="80%" alt="" />
           <span className="product-img-percent">15%</span>
           <div
             className="product-img-more"
@@ -22,13 +21,9 @@ const ProductCard = (props) => {
           </div>
         </div>
         <div className="product-info">
-          <div className="product-info-price">
-            <span className="price">$20.12</span>
-            <span className="sale-price">$15.37</span>
-          </div>
-          <Link to="/detail" className="product-info-name">
+          <div to="/detail" className="product-info-name">
             Field Roast Chao Cheese Creamy Original
-          </Link>
+          </div>
           <span className="status">in stock</span>
           <div className="product-info-star">
             <i className="ri-star-fill"></i>
@@ -36,10 +31,15 @@ const ProductCard = (props) => {
             <i className="ri-star-fill"></i>
             <i className="ri-star-fill"></i>
             <i className="ri-star-line"></i>
+            <span className="star-num">4</span>
           </div>
-          <div className="product-info-cart">
-            <div className="product-info-cart-btn">Add to cart</div>
+          <div className="product-info-price">
+            <span className="price">$20.12</span>
+            <span className="sale-price">$15.37</span>
           </div>
+        </div>
+        <div className="product-overlay">
+          <div className="product-info-cart-btn">Add to cart</div>
         </div>
       </div>
     </div>

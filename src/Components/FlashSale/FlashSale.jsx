@@ -1,6 +1,6 @@
 import React from "react";
 import Countdown from "react-countdown";
-import SaleProductCard from "./SaleProductCard/SaleProductCard";
+import ProductCard from "../ProductCard/ProductCard";
 import "./FlashSale.scss";
 
 const FlashSale = (props) => {
@@ -37,19 +37,19 @@ const FlashSale = (props) => {
         <div className="flashsale__content">
           <div className="flashsale__content-container">
             <div className="flashsale__content-item">
-              <SaleProductCard />
+              <ProductCard />
             </div>
             <div className="flashsale__content-item">
-              <SaleProductCard />
+              <ProductCard />
             </div>
             <div className="flashsale__content-item">
-              <SaleProductCard />
+              <ProductCard />
             </div>
             <div className="flashsale__content-item">
-              <SaleProductCard />
+              <ProductCard />
             </div>
             <div className="flashsale__content-item">
-              <SaleProductCard />
+              <ProductCard />
             </div>
           </div>
         </div>

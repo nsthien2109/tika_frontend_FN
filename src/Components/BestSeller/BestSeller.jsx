@@ -43,8 +43,11 @@ const BestSeller = (props) => {
                 // width: 768,
                 slidesPerView: 4,
               },
-              450: {
+              550: {
                 slidesPerView: 3,
+              },
+              250: {
+                slidesPerView: 2,
               },
             }}
             spaceBetween={0}
