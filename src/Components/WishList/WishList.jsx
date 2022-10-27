@@ -4,6 +4,7 @@ import type { ColumnsType } from "antd/es/table";
 
 import Button from "../Button/Button";
 import imgProduct from "../../Assets/imgProduct.jpg";
+import { serverNetwork } from "../../Services/utils/value";
 
 interface DataType {
   key: React.Key;
@@ -29,30 +30,30 @@ const columns: ColumnsType<DataType> = [
     title: "Date",
     dataIndex: "date",
   },
-  {
-    title: "Stock",
-    dataIndex: "stock",
-  },
+
   {
     title: "",
     dataIndex: "btn",
   },
 ];
 
-const data: DataType[] = [];
-for (let i = 0; i < 15; i++) {
-  data.push({
-    key: i,
-    image: <img src={imgProduct} width="70" alt="" />,
-    name: `Product King ${i}`,
-    price: "$32.56",
-    date: "21-07-2019",
-    stock: "instock",
-    btn: <Button label="Add to cart" />,
-  });
-}
-
 const WishList = (props) => {
+  const favorites = props.favorites;
+  const data: DataType[] = [];
+  favorites.map((item) => {
+    data.push({
+      key: item.id_favorite,
+      image: (
+        <img src={`${serverNetwork}/${item.productImage}`} width="70" alt="" />
+      ),
+      name: `${item.productName}`,
+      price: `$${
+        item.productPrice - item.productPrice * (item.discount / 100)
+      }`,
+      date: "21-07-2019",
+      btn: <Button label="Add to cart" />,
+    });
+  });
   return (
     <div>
       <div className="">

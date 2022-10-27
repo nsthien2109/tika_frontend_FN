@@ -1,31 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Filter.scss";
 import { Checkbox, Slider } from "antd";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
+
 import bannerStabuck from "../../Assets/milktea.gif";
 import saleBanner from "../../Assets/shop_sale.gif";
 import furnitureBanner from "../../Assets/furniture.gif";
+import { useDispatch, useSelector } from "react-redux";
+import FilterProduct_Slice from "../../Redux/Slice/FilterProduct_Slice";
+import { subCategorySelected } from "../../Redux/selector";
 
 const Filter = (props) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(FilterProduct_Slice.actions.filterSubCategoryChange([]));
+  }, []);
+
   const onChange = (checkedValues: CheckboxValueType[]) => {
+    dispatch(
+      FilterProduct_Slice.actions.filterSubCategoryChange([...checkedValues])
+    );
     console.log("checked = ", checkedValues);
   };
 
   const handleStyle = { color: 202435 };
 
   const options = [
-    { label: "Apple", value: "Apple" },
-    { label: "Pear", value: "Pear" },
-    { label: "Orange", value: "Men Clothes" },
-    { label: "Woman Clothes", value: "Woman Clothes" },
-    { label: "Orange", value: "Kids" },
-    { label: "Orange", value: "Spring" },
-    { label: "Woman Clothes", value: "Summer" },
-    { label: "Orange", value: "Orange" },
-    { label: "Orange", value: "Orange" },
-    { label: "Woman Clothes", value: "Orange" },
-    { label: "Orange", value: "Orange" },
-    { label: "Woman Clothes", value: "Orange" },
+    ...props.subCategories?.map((sub) => {
+      return { label: sub.subCategoryName, value: sub.id_sub_category };
+    }),
   ];
 
   return (
@@ -33,11 +36,7 @@ const Filter = (props) => {
       <div className="filter__container">
         <div className="filter__category">
           <h3 className="filter__category-label">Product categories</h3>
-          <Checkbox.Group
-            options={options}
-            defaultValue={["Apple"]}
-            onChange={onChange}
-          />
+          <Checkbox.Group options={options} onChange={onChange} />
         </div>
         <div className="filter__price">
           <h3 className="filter__price-label">Filter by price</h3>
@@ -51,14 +50,6 @@ const Filter = (props) => {
               <div className="filter__price-content-sub-btn">Filter</div>
             </div>
           </div>
-        </div>
-        <div className="filter__brand">
-          <h3 className="filter__brand-label">Brands</h3>
-          <Checkbox.Group
-            options={options}
-            defaultValue={["Apple"]}
-            onChange={onChange}
-          />
         </div>
         <div className="filter__banner">
           <img src={bannerStabuck} alt="" />

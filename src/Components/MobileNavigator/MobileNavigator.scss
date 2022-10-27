@@ -3,6 +3,7 @@
   height: 56px;
   position: fixed;
   bottom: 0;
+  z-index: 99;
   left: 0;
   right: 0;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
@@ -20,11 +21,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     i {
       font-size: 20px;
     }
     .nav-mobile__item-text {
       font-size: 10px;
+    }
+    &:hover {
+      color: var(--black-text);
     }
   }
 

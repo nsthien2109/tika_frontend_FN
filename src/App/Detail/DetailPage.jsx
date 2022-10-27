@@ -1,32 +1,109 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./DetailPage.scss";
+import { useParams, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import ButtonSizeCheck from "../../Components/ButtonSizeCheck/ButtonSizeCheck";
 import ButtonColorCheck from "../../Components/ButtonColorCheck/ButtonColorCheck";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Checkbox } from "antd";
+import { Checkbox, notification } from "antd";
 import Button from "../../Components/Button/Button";
 import DetailTabs from "../../Components/DetailTabs/DetailTabs";
 import RelatedProduct from "../../Components/RelatedProduct/RelatedProduct";
 import "swiper/css/effect-cards";
 import { EffectCards } from "swiper";
+import { addCart } from "../../Services/CartRequest";
+
+import { serverNetwork } from "../../Services/utils/value";
+import {
+  detailSelector,
+  detailImageSelector,
+  imageProductSelector,
+  productSizeSelector,
+  productColorSelector,
+  loginSelector,
+} from "../../Redux/selector";
+import {
+  getDetailProduct,
+  getImagesProduct,
+} from "../../Services/DetailRequest";
 
 const DetailPage = (props) => {
-  const [selected, setSelected] = useState("M");
+  let { id } = useParams();
+  const [sizeSelected, setSizeSelected] = useState(null);
+  const [colorSelected, setColorSelected] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+  const navigate = useNavigate();
+  const userData = useSelector(loginSelector);
+
   const handleSizeSelected = (value) => {
-    setSelected(value);
+    setSizeSelected(value);
   };
+
+  const handleColorSelected = (value) => {
+    setColorSelected(value);
+  };
+
+  const incrementQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const decrementQuantity = () => {
+    if (quantity <= 1) {
+      setQuantity(1);
+    } else {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const dispatch = useDispatch();
+
+  const handleAddCart = async () => {
+    if (userData?.accessToken === undefined) {
+      navigate("/auth");
+    } else {
+      const cartData = {
+        id_product: product?.id_product,
+        id_size: sizeSelected,
+        id_color: colorSelected,
+        quantity: quantity,
+      };
+      await addCart(cartData, dispatch, userData?.accessToken).then(() => {
+        notification["success"]({
+          message: `${product?.productName}`,
+          description: "Added to cart.",
+        });
+      });
+      props.handleModal();
+    }
+  };
+
+  useEffect(() => {
+    getDetailProduct(id, dispatch);
+    getImagesProduct(id, dispatch);
+  }, []);
+
+  const sizes = useSelector(productSizeSelector);
+  const colors = useSelector(productColorSelector);
+  const product = useSelector(detailSelector);
+  const images = useSelector(detailImageSelector);
+
+  var price = product?.productPrice;
+  var salePrice =
+    product?.productPrice - product?.productPrice * (product?.discount / 100);
 
   return (
     <div className="detail-page">
       <div className="detail-page__container">
         <div className="detail-page__overview">
           <div className="detail-page__overview-name mb-3">
-            All Natural Italian-Style Chicken Meatballs
+            {product.productName}
           </div>
           <div className="detail-page__overview-meta flex justify-start items-center mb-4">
             <p className="sub-category text-xs mr-3">
               Product category :{" "}
-              <span className="text-sm font-semibold">Man clothes</span>
+              <span className="text-sm font-semibold">
+                {product.categoryName}
+              </span>
             </p>
             <a
               href="#tab-c"
@@ -35,7 +112,8 @@ const DetailPage = (props) => {
               <span className="uppercase ml-1">Reviews</span>
             </a>
             <p className="brand text-xs">
-              Brand : <span className="text-sm font-semibold">Chanel</span>
+              Brand :{" "}
+              <span className="text-sm font-semibold">{product.brandName}</span>
             </p>
           </div>
           <div className="flex justify-between flex-col lg:flex-row items-center mt-3">
@@ -45,54 +123,71 @@ const DetailPage = (props) => {
                 grabCursor={true}
                 modules={[EffectCards]}
                 className="mySwiper">
-                <SwiperSlide>Slide 1</SwiperSlide>
-                <SwiperSlide>Slide 2</SwiperSlide>
-                <SwiperSlide>Slide 3</SwiperSlide>
-                <SwiperSlide>Slide 4</SwiperSlide>
-                <SwiperSlide>Slide 5</SwiperSlide>
-                <SwiperSlide>Slide 6</SwiperSlide>
-                <SwiperSlide>Slide 7</SwiperSlide>
-                <SwiperSlide>Slide 8</SwiperSlide>
-                <SwiperSlide>Slide 9</SwiperSlide>
+                {images &&
+                  images.map((img) => {
+                    return (
+                      <SwiperSlide>
+                        <img
+                          src={`${serverNetwork}/${img.url}`}
+                          alt=""
+                          className="img-product w-full h-full object-cover"
+                        />
+                      </SwiperSlide>
+                    );
+                  })}
               </Swiper>
             </div>
             <div className="detail-page__overview-info w-full md:w-1/2 lg:w-[35%]">
               <div className="detail-page__overview-info-price">
-                <div className="price">$9.35</div>
-                <div className="sale-price">$7.21</div>
+                <div className="price">${price}</div>
+                <div className="sale-price">${salePrice}</div>
               </div>
               <div className="detail-page__overview-info-stock uppercase">
                 In stock
               </div>
               <div className="detail-page__overview-size flex justify-start mt-3">
-                <ButtonSizeCheck label="M" selected={selected} />
-                <ButtonSizeCheck label="X" />
-                <ButtonSizeCheck label="L" />
-                <ButtonSizeCheck label="XL" />
-                <ButtonSizeCheck label="XXL" />
+                {sizes?.length > 0 &&
+                  sizes.map((size) => {
+                    return (
+                      <ButtonSizeCheck
+                        label={size.sizeName}
+                        onClick={() => handleSizeSelected(size.id_size)}
+                        selected={size.id_size == sizeSelected ? true : false}
+                      />
+                    );
+                  })}
               </div>
               <div className="detail-page__overview-color flex justify-start mt-3">
-                <ButtonColorCheck colorName="Yellow" colorHex="#e6e645" />
-                <ButtonColorCheck colorName="Black" colorHex="#000000" />
-                <ButtonColorCheck
-                  colorName="Brow"
-                  colorHex="#633a00"
-                  selected={selected}
-                />
-                <ButtonColorCheck colorName="Blue" colorHex="#001f91" />
+                {colors?.length > 0 &&
+                  colors.map((color) => {
+                    return (
+                      <ButtonColorCheck
+                        colorName={color.colorName}
+                        colorHex={`#${color.colorHex}`}
+                        onClick={() => handleColorSelected(color.id_color)}
+                        selected={
+                          color.id_color == colorSelected ? true : false
+                        }
+                      />
+                    );
+                  })}
               </div>
               <div className="detail-page__overview-add-cart">
                 <div className="detail-page__overview-add-cart__counter">
-                  <div className="remove">
+                  <div className="remove" onClick={decrementQuantity}>
                     <i className="ri-subtract-fill"></i>
                   </div>
-                  <p className="amount">2</p>
-                  <div className="add">
+                  <p className="amount">{quantity}</p>
+                  <div className="add" onClick={incrementQuantity}>
                     <i className="ri-add-fill"></i>
                   </div>
                 </div>
                 <div className="detail-page__overview-cart-btn">
-                  <Button label="Add to cart" rounder={true} />
+                  <Button
+                    label="Add to cart"
+                    onClick={handleAddCart}
+                    rounder={true}
+                  />
                 </div>
               </div>
               <div className="detail-page__overview_wishlist">
@@ -102,10 +197,12 @@ const DetailPage = (props) => {
               </div>
               <div className="detail-page__overview-checklist py-4">
                 <div className="detail-page__overview-checklist-item">
-                  <i className="ri-check-line mr-2"></i> Category : Men Clothes
+                  <i className="ri-check-line mr-2"></i> Category :{" "}
+                  {product.subCategoryName}
                 </div>
                 <div className="detail-page__overview-checklist-item">
-                  <i className="ri-check-line mr-2"></i> Brand : Gucci Gang
+                  <i className="ri-check-line mr-2"></i> Brand :{" "}
+                  {product.brandName}
                 </div>
               </div>
               <hr className="my-5" />
@@ -136,7 +233,7 @@ const DetailPage = (props) => {
           </div>
         </div>
         <div className="detai-page-description">
-          <DetailTabs />
+          <DetailTabs product={product} />
         </div>
         <div className="detail-page-related">
           <RelatedProduct />

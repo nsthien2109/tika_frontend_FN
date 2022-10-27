@@ -1,7 +1,10 @@
 import React from "react";
 import ProductCard from "../ProductCard/ProductCard";
+import { useSelector } from "react-redux";
+import { productSelector } from "../../Redux/selector";
 import "./HomeProducts.scss";
 const HomeProducts = (props) => {
+  const products = useSelector(productSelector);
   return (
     <div className="home-products">
       <div className="home-products__container">
@@ -17,26 +20,10 @@ const HomeProducts = (props) => {
           </a>
         </div>
         <div className="home-products-list grid-cols-2 grid md:grid-cols-3 lg:grid-cols-5 gap-4">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {products &&
+            products?.map((product) => {
+              return <ProductCard product={product} key={product.id_product} />;
+            })}
         </div>
         <div className="home-products__bottom">
           <div className="home-products__bottom-btn">Show more</div>

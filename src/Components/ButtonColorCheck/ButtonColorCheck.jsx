@@ -4,6 +4,7 @@ const ButtonColorCheck = (props) => {
   return (
     <div
       className="btn-color-check"
+      onClick={props.onClick}
       style={{ backgroundColor: props.colorHex }}>
       <p className="btn-color-check__label">{props.colorName}</p>
       <div

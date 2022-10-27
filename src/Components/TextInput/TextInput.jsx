@@ -8,7 +8,9 @@ const TextInput = (props) => {
         type={props.type}
         className="input-text"
         id={props.id}
+        value={props.value}
         placeholder={props.placeholder}
+        onChange={props.onChange}
       />
     </div>
   );

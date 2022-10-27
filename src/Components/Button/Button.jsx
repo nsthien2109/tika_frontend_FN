@@ -4,6 +4,7 @@ import "./Button.scss";
 const Button = (props) => {
   return (
     <div
+      onClick={props.onClick}
       className={`tika__btn-big ${
         props.rounder ? "rounded-full" : "rounded-2xl"
       }`}>

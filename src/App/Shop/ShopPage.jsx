@@ -1,10 +1,16 @@
 import React from "react";
 import Filter from "../../Components/Filter/Filter";
 import "./ShopPage.scss";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import bannerDemo from "../../Assets/bannerDemo.jpg";
 import ProductCard from "../../Components/ProductCard/ProductCard";
+import { productListFilter, subCategoryByCategory } from "../../Redux/selector";
 
 const ShopPage = (props) => {
+  const idCategory = useParams();
+  const products = useSelector(productListFilter);
+  const subCategories = useSelector(subCategoryByCategory);
   return (
     <div className="shop-page">
       <div className="shop-page__container">
@@ -20,61 +26,16 @@ const ShopPage = (props) => {
         </div>
         <div className="shop-page__content">
           <div className="shop-page__content-filter hidden lg:block">
-            <Filter />
+            <Filter subCategories={subCategories} />
           </div>
           <div className="shop-page__content-products">
             <div className=" grid grid-cols-2 gap-2 lg:grid-cols-4">
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
+              {products &&
+                products?.map((product) => {
+                  return (
+                    <ProductCard product={product} key={product.id_product} />
+                  );
+                })}
             </div>
             <div className="shop-page-more">
               <div className="shop-page-more-btn">Show more</div>

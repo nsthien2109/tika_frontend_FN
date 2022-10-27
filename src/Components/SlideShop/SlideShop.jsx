@@ -1,13 +1,14 @@
 import React, { useRef, useCallback } from "react";
+import { useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SlideShopItem from "../SlideShopItem/SlideShopItem";
-
+import { storeSelector } from "../../Redux/selector";
 import "./SlideShop.scss";
 import { Navigation } from "swiper";
 
 const SlideShop = (props) => {
+  const stores = useSelector(storeSelector);
   const sliderRef = useRef(null);
-
   const handlePrev = useCallback(() => {
     if (!sliderRef.current) return;
     sliderRef.current.swiper.slidePrev();
@@ -49,24 +50,14 @@ const SlideShop = (props) => {
             loopFillGroupWithBlank={true}
             modules={[Navigation]}
             className="mySwiper">
-            <SwiperSlide>
-              <SlideShopItem />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SlideShopItem />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SlideShopItem />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SlideShopItem />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SlideShopItem />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SlideShopItem />
-            </SwiperSlide>
+            {stores &&
+              stores.map((store) => {
+                return (
+                  <SwiperSlide>
+                    <SlideShopItem store={store} />
+                  </SwiperSlide>
+                );
+              })}
             <div className="prev-arrow" onClick={handlePrev}>
               <i className="ri-arrow-left-s-line"></i>
             </div>

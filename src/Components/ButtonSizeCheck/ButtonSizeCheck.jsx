@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./ButtonSizeCheck.scss";
 const ButtonSizeCheck = (props) => {
   return (
-    <div className="btn-size-check">
+    <div className="btn-size-check" onClick={props.onClick}>
       <p className="btn-size-check__label">{props.label}</p>
       <div
         className={`btn-size-check__selected w-full h-full ${
