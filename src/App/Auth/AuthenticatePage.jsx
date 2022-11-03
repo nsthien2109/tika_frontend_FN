@@ -20,6 +20,7 @@ const AuthenticatePage = (props) => {
   const navigate = useNavigate();
 
   const message = useSelector(messageAuthSelector);
+
   const resetState = () => {
     setFirstName("");
     setLastName("");

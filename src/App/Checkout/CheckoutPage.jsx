@@ -19,7 +19,7 @@ const CheckoutPage = () => {
           <hr className="my-3" />
           <div className="checkout-page__billing-form">
             <form action="" method="post">
-              <div class="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 <TextInput
                   id="bl_firstName"
                   type="text"
@@ -57,7 +57,7 @@ const CheckoutPage = () => {
                 label="Specific *"
                 placeholder="Enter specific address"
               />
-              <div class="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 <TextInput
                   id="bl_Email"
                   type="email"

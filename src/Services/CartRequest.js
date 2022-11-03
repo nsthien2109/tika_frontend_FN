@@ -45,3 +45,18 @@ export const removeCart = async (id_cart, dispatch, token) => {
     dispatch(Cart_Slice.actions.deleteCartFailure(error));
   }
 };
+
+export const checkCoupon = async (couponData, dispatch, token) => {
+  dispatch(Cart_Slice.actions.checkCouponStart("Loading, please wait..."));
+  try {
+    const response = await axios.post(`${server}/check-coupon`, couponData, {
+      "Content-Type": "multipart/form-data",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    dispatch(Cart_Slice.actions.checkCouponSuccess(response.data));
+  } catch (error) {
+    dispatch(
+      Cart_Slice.actions.checkCouponFailure(error.response.data.message)
+    );
+  }
+};

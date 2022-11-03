@@ -1,9 +1,13 @@
 import React from "react";
 import Countdown from "react-countdown";
 import ProductCard from "../ProductCard/ProductCard";
+import { useSelector } from "react-redux";
 import "./FlashSale.scss";
+import ProductHorizontal from "../ProductHorizontal/ProductHorizontal";
+import { flashsaleProduct } from "../../Redux/selector";
 
 const FlashSale = (props) => {
+  const flashsales = useSelector(flashsaleProduct);
   const Completionist = () => (
     <span className="countdown-success">You are good to go!</span>
   );
@@ -34,25 +38,12 @@ const FlashSale = (props) => {
             <Countdown date={Date.now() + 500000} renderer={renderer} />
           </div>
         </div>
-        <div className="flashsale__content">
-          <div className="flashsale__content-container">
-            <div className="flashsale__content-item">
-              <ProductCard />
-            </div>
-            <div className="flashsale__content-item">
-              <ProductCard />
-            </div>
-            <div className="flashsale__content-item">
-              <ProductCard />
-            </div>
-            <div className="flashsale__content-item">
-              <ProductCard />
-            </div>
-            <div className="flashsale__content-item">
-              <ProductCard />
-            </div>
-          </div>
-        </div>
+        <ProductHorizontal
+          title="Flashsale"
+          subtitle="Do not miss the current offers on this time"
+          redBorder={true}
+          products={flashsales}
+        />
       </div>
     </div>
   );

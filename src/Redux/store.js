@@ -22,6 +22,8 @@ import FilterProduct_Slice from "./Slice/FilterProduct_Slice";
 import Favorite_Slice from "./Slice/Favorite_Slice";
 import ProductInfo_Slice from "./Slice/ProductInfo_Slice";
 import Cart_Slice from "../Redux/Slice/Cart_Slice";
+import Address_Slice from "./Slice/Address_Slice";
+import FlashSale_Slice from "./Slice/FlashSale_Slice";
 
 const rootReducer = combineReducers({
   UI: UI_Slice.reducer,
@@ -36,6 +38,8 @@ const rootReducer = combineReducers({
   favorites: Favorite_Slice.reducer,
   productInfo: ProductInfo_Slice.reducer,
   cart: Cart_Slice.reducer,
+  address: Address_Slice.reducer,
+  flashsale: FlashSale_Slice.reducer,
 });
 
 const persistConfig = {

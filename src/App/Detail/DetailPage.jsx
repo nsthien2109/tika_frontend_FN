@@ -96,13 +96,13 @@ const DetailPage = (props) => {
       <div className="detail-page__container">
         <div className="detail-page__overview">
           <div className="detail-page__overview-name mb-3">
-            {product.productName}
+            {product?.productName}
           </div>
           <div className="detail-page__overview-meta flex justify-start items-center mb-4">
             <p className="sub-category text-xs mr-3">
               Product category :{" "}
               <span className="text-sm font-semibold">
-                {product.categoryName}
+                {product?.categoryName}
               </span>
             </p>
             <a
@@ -113,7 +113,9 @@ const DetailPage = (props) => {
             </a>
             <p className="brand text-xs">
               Brand :{" "}
-              <span className="text-sm font-semibold">{product.brandName}</span>
+              <span className="text-sm font-semibold">
+                {product?.brandName}
+              </span>
             </p>
           </div>
           <div className="flex justify-between flex-col lg:flex-row items-center mt-3">
@@ -126,7 +128,7 @@ const DetailPage = (props) => {
                 {images &&
                   images.map((img) => {
                     return (
-                      <SwiperSlide>
+                      <SwiperSlide key={img.id_image}>
                         <img
                           src={`${serverNetwork}/${img.url}`}
                           alt=""
@@ -150,6 +152,7 @@ const DetailPage = (props) => {
                   sizes.map((size) => {
                     return (
                       <ButtonSizeCheck
+                        key={size.id_size}
                         label={size.sizeName}
                         onClick={() => handleSizeSelected(size.id_size)}
                         selected={size.id_size == sizeSelected ? true : false}
@@ -162,6 +165,7 @@ const DetailPage = (props) => {
                   colors.map((color) => {
                     return (
                       <ButtonColorCheck
+                        key={color.id_color}
                         colorName={color.colorName}
                         colorHex={`#${color.colorHex}`}
                         onClick={() => handleColorSelected(color.id_color)}
@@ -198,11 +202,11 @@ const DetailPage = (props) => {
               <div className="detail-page__overview-checklist py-4">
                 <div className="detail-page__overview-checklist-item">
                   <i className="ri-check-line mr-2"></i> Category :{" "}
-                  {product.subCategoryName}
+                  {product?.subCategoryName}
                 </div>
                 <div className="detail-page__overview-checklist-item">
                   <i className="ri-check-line mr-2"></i> Brand :{" "}
-                  {product.brandName}
+                  {product?.brandName}
                 </div>
               </div>
               <hr className="my-5" />

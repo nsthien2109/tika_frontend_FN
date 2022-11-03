@@ -3,11 +3,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import ProductCard from "../ProductCard/ProductCard";
 import imgProduct from "../../Assets/imgProduct.jpg";
-import "./BestSeller.scss";
+import "./ProductHorizontal.scss";
 
-const BestSeller = (props) => {
+const ProductHorizontal = (props) => {
   const sliderRef = useRef(null);
-
+  const products = props.products;
   const handlePrev = useCallback(() => {
     if (!sliderRef.current) return;
     sliderRef.current.swiper.slidePrev();
@@ -17,64 +17,58 @@ const BestSeller = (props) => {
     if (!sliderRef.current) return;
     sliderRef.current.swiper.slideNext();
   }, []);
+
+  console.log(products?.length);
   return (
-    <div className="best-seller">
-      <div className="best-seller__container">
-        <div className="best-seller__header">
-          <div className="best-seller__header-left">
-            <h3 className="best-seller__header-title">Best seller</h3>
-            <p className="best-seller__header-subtitle">
-              Do not miss the current offers until the end of month.
+    <div className="product-horizontal">
+      <div className="product-horizontal__container">
+        <div className="product-horizontal__header">
+          <div className="product-horizontal__header-left">
+            <h3 className="product-horizontal__header-title">{props.title}</h3>
+            <p className="product-horizontal__header-subtitle">
+              {props.subtitle}
             </p>
           </div>
-          <a href="#aaa" className="best-seller__header-btn">
+          <a href="#aaa" className="product-horizontal__header-btn">
             View all
           </a>
         </div>
-        <div className="best-seller__content">
+        <div className="product-horizontal__content ">
           <Swiper
             ref={sliderRef}
             breakpoints={{
               1200: {
-                // width: 576,
                 slidesPerView: 5,
+                slidesPerGroup: products?.length >= 5 ? 5 : products?.length,
               },
               768: {
-                // width: 768,
                 slidesPerView: 4,
+                slidesPerGroup: products?.length >= 4 ? 4 : products?.length,
               },
               550: {
                 slidesPerView: 3,
+                slidesPerGroup: products?.length >= 3 ? 3 : products?.length,
               },
               250: {
                 slidesPerView: 2,
+                slidesPerGroup: products?.length >= 2 ? 2 : products?.length,
               },
             }}
             spaceBetween={0}
-            slidesPerGroup={3}
             autoplay={{ delay: 5000 }}
             loop={true}
             loopFillGroupWithBlank={true}
             modules={[Navigation]}
             className="mySwiper">
-            <SwiperSlide>
-              <ProductCard />
-            </SwiperSlide>
-            <SwiperSlide>
-              <ProductCard />
-            </SwiperSlide>
-            <SwiperSlide>
-              <ProductCard />
-            </SwiperSlide>
-            <SwiperSlide>
-              <ProductCard />
-            </SwiperSlide>
-            <SwiperSlide>
-              <ProductCard />
-            </SwiperSlide>
-            <SwiperSlide>
-              <ProductCard />
-            </SwiperSlide>
+            {products &&
+              products?.map((product) => {
+                return (
+                  <SwiperSlide key={product?.id_product}>
+                    <ProductCard product={product} />
+                  </SwiperSlide>
+                );
+              })}
+
             <div className="prev-arrow" onClick={handlePrev}>
               <i className="ri-arrow-left-s-line"></i>
             </div>
@@ -88,4 +82,4 @@ const BestSeller = (props) => {
   );
 };
 
-export default BestSeller;
+export default ProductHorizontal;

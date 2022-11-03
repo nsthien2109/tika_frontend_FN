@@ -146,6 +146,7 @@ const DetailContentModal = (props) => {
                   sizes.map((size) => {
                     return (
                       <ButtonSizeCheck
+                        key={size.id_size}
                         label={size.sizeName}
                         onClick={() => handleSizeSelected(size.id_size)}
                         selected={size.id_size == sizeSelected ? true : false}
@@ -158,6 +159,7 @@ const DetailContentModal = (props) => {
                   colors.map((color) => {
                     return (
                       <ButtonColorCheck
+                        key={color.id_color}
                         colorName={color.colorName}
                         colorHex={`#${color.colorHex}`}
                         onClick={() => handleColorSelected(color.id_color)}

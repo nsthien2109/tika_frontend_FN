@@ -26,8 +26,10 @@ import { getProducts } from "../Services/ProductRequest";
 import { getSubCategories } from "../Services/SubCategoryRequest";
 import { getFavorites } from "../Services/FavoriteRequest";
 import { getCart } from "../Services/CartRequest";
+import { getAddress } from "../Services/AddressRequest";
+import { getFlashSale } from "../Services/FlashSaleRequest";
 
-import { loginSelector, userInfoSelector } from "../Redux/selector";
+import { loginSelector, userInfoSelector, timeNow } from "../Redux/selector";
 
 const App = () => {
   /** Call to redux */
@@ -52,9 +54,13 @@ const App = () => {
     getStores(dispatch);
     getProducts(dispatch);
     getSubCategories(dispatch);
+    getFlashSale(dispatch).then(() => {
+      console.log("Loading success");
+    });
     if (loginCheck?.data != null) {
       getFavorites(user?.id, dispatch, loginCheck?.accessToken);
       getCart(dispatch, loginCheck?.accessToken);
+      getAddress(dispatch, loginCheck?.accessToken);
     }
   }, [loginCheck]);
 
@@ -68,7 +74,10 @@ const App = () => {
           <Route path="/shop/category-:id_category" element={<ShopPage />} />
           <Route path="/auth" element={<AuthenticatePage />} />
           <Route path="/detail/:id" element={<DetailPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route
+            path="/profile"
+            element={<ProfilePage loginCheck={loginCheck} />}
+          />
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
         </Routes>

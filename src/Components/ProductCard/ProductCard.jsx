@@ -84,9 +84,15 @@ const ProductCard = (props) => {
   }, [yourFavoriteList]);
 
   var price = props.product?.productPrice;
+  var flashSaleDiscount = props.product?.salePercent ?? 0;
+  var discountPercent =
+    flashSaleDiscount > 0 ? flashSaleDiscount : props.product?.discount;
   var salePrice =
-    props.product?.productPrice -
-    props.product?.productPrice * (props.product?.discount / 100);
+    flashSaleDiscount > 0
+      ? props.product?.productPrice -
+        props.product?.productPrice * (flashSaleDiscount / 100)
+      : props.product?.productPrice -
+        props.product?.productPrice * (props.product?.discount / 100);
 
   return (
     <div className="product-card">
@@ -97,7 +103,12 @@ const ProductCard = (props) => {
             width="80%"
             alt=""
           />
-          <span className="product-img-percent">15%</span>
+          <span
+            className={`product-img-percent ${
+              discountPercent > 0 ? "" : "hidden"
+            }`}>
+            {discountPercent | 0}%
+          </span>
           <div
             className="product-img-more"
             onClick={(event) => event.stopPropagation()}>

@@ -5,17 +5,16 @@ import FlashSale from "../../Components/FlashSale/FlashSale";
 import SlideCategory from "../../Components/SlideCategory/SlideCategory";
 import SlideShop from "../../Components/SlideShop/SlideShop";
 import HomeProducts from "../../Components/HomeProducts/HomeProducts";
-import BestSeller from "../../Components/BestSeller/BestSeller";
+import ProductHorizontal from "../../Components/ProductHorizontal/ProductHorizontal";
+
 /** Import Selector */
 
 const HomePage = (props) => {
   return (
     <>
       <SlideShow />
-      {/* <FlashSale /> */}
+      <FlashSale />
       <SlideCategory setCategory={props.setCategory} />
-      {/* <BestSeller /> */}
-      {/* <SlideShop /> */}
       <HomeProducts />
     </>
   );

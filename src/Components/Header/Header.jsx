@@ -12,7 +12,7 @@ function Header(props) {
   const loginCheck = useSelector(loginSelector);
   const cart = useSelector(cartSelector);
 
-  const subTotal = cart.reduce((accumulator, object) => {
+  const subTotal = cart?.reduce((accumulator, object) => {
     return accumulator + object.productPrice * object.quantity;
   }, 0);
 
@@ -47,7 +47,9 @@ function Header(props) {
           <span className="header__right__cart-total">$ {subTotal}.00</span>
           <Link to="cart" className="header__right__cart-icon">
             <i className="ri-shopping-cart-line"></i>
-            <div className="header__right__cart-icon-number">{cart.length}</div>
+            <div className="header__right__cart-icon-number">
+              {cart?.length}
+            </div>
           </Link>
         </div>
       </div>

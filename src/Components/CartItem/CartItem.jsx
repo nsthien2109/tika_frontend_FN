@@ -25,7 +25,7 @@ const CartItem = (props) => {
           <i className="ri-add-line"></i>
         </div>
         <div className="cart-item__more-subtotal hidden sm:block">
-          ${cartItemPrice}.00
+          ${cartItemPrice}
         </div>
         <div
           className="cart-item__more-remove hidden sm:block"

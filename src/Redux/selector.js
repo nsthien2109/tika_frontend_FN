@@ -12,9 +12,12 @@ export const categorySelector = (state) => state.categories.categories?.data;
 export const storeSelector = (state) => state.stores.stores?.data;
 
 /** Auth */
-export const loginSelector = (state) => state.auth.login?.currentUser;
-export const userInfoSelector = (state) => state.auth.login?.currentUser?.data;
+export const loginSelector = (state) => state.auth?.currentUser;
+export const userInfoSelector = (state) => state.auth?.currentUser?.data;
 export const messageAuthSelector = (state) => state.auth?.message;
+
+/** Address */
+export const addressSelector = (state) => state.address.address?.data;
 
 /** Product */
 export const productSelector = (state) => state.products.products?.data?.data;
@@ -39,7 +42,32 @@ export const productColorSelector = (state) =>
 
 // Cart
 export const cartSelector = (state) => state.cart.cart?.data;
+//Coupon Selector
+export const couponSelector = (state) => state.cart.coupon?.data;
+export const couponMessage = (state) => state.cart.coupon?.message;
 
+export const subTotalCart = createSelector(
+  cartSelector,
+  couponSelector,
+  (cart, coupon) => {
+    return cart?.reduce((accumulator, cartItem) => {
+      const price =
+        cartItem.productPrice -
+        cartItem.productPrice * (cartItem.discount / 100);
+      if (coupon && coupon?.couponType === "global") {
+        const newSubTotal = accumulator + price * cartItem.quantity;
+        return newSubTotal - newSubTotal * (coupon?.couponPercent / 100);
+      } else if (coupon && coupon?.couponType === "store") {
+        if (coupon?.id_store === cartItem.id_store) {
+          const salePrice = price - price * (coupon?.couponPercent / 100);
+          const newSubTotal = accumulator + salePrice * cartItem.quantity;
+          return newSubTotal;
+        }
+      }
+      return accumulator + price * cartItem.quantity;
+    }, 0);
+  }
+);
 /** FILTER */
 export const categoryFilterSelected = (state) => state.filter.categorySelected;
 export const storeFilterSelected = (state) => state.filter.storeSelected;
@@ -83,59 +111,28 @@ export const productListFilter = createSelector(
         products.productName.includes(searchText) &&
         products.id_category == category &&
         (subCategory.length ? products.id_sub_category == subCategory : true)
-      ); //&&
-      // (store ? products.id_store.includes(store) : true) &&
-      // (subCategory.length
-      //   ? products.id_sub_category.includes(subCategory)
-      //   : true) &&
-      // (brand.length ? products.id_brand.includes(brand) : true) &&
-      // products.price >= startPrice &&
-      // products.price <= endPrice
+      );
     });
   }
 );
 
-// export const productListFilter = createSelector(
-//   productSelector,
-//   categoryFilterSelected,
-//   storeFilterSelected,
-//   subCategorySelected,
-//   searchFilterSelector,
-//   brandFilterSelected,
-//   startPriceFilterSelected,
-//   endPriceFilterSelected,
-//   (
-//     products,
-//     category,
-//     store,
-//     subCategory,
-//     searchText,
-//     brand,
-//     startPrice,
-//     endPrice
-//   ) => {
-//     console.log(category, searchText);
-//     return (
-//       products.productName.includes(searchText ?? "") &&
-//       (category.length
-//         ? products.id_category.includes(category ?? [])
-//         : true) &&
-//       (store ? products.id_store.includes(store ?? "") : true) &&
-//       (subCategory.length
-//         ? products.id_sub_category.includes(subCategory ?? [])
-//         : true) &&
-//       (brand.length ? products.id_brand.includes(brand ?? []) : true) &&
-//       products.price >= startPrice &&
-//       products.price <= endPrice
-//     );
-//   }
-// );
+export const flashsaleSelector = (state) => state.flashsale.flashsale?.data;
 
-// List product filter Select
-// export const productFilterSelect = createSelector(
-//   productSelector,
-//   categorySelected,
-//   subCategorySelector,
-//   searchTextSelector,
-//   brandSelector
-// );
+export const flashsaleProduct = createSelector(
+  flashsaleSelector,
+  (flashsales) => {
+    const getDay = new Date();
+    return flashsales.filter((item) => {
+      const day = new Date(item?.sale_day);
+      const start = new Date(item?.sale_day + ":" + item?.start);
+      const end = new Date(item?.sale_day + ":" + item?.end);
+      return (
+        day.getDate() == getDay.getDate() &&
+        day.getMonth() == getDay.getMonth() &&
+        day.getFullYear() == getDay.getFullYear() &&
+        getDay >= start &&
+        getDay <= end
+      );
+    });
+  }
+);
