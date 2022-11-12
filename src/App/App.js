@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Header from "../Components/Header/Header";
 import MobileNavigator from "../Components/MobileNavigator/MobileNavigator";
 import Drawer from "../Components/Drawer/Drawer";
@@ -10,6 +10,7 @@ import DetailPage from "./Detail/DetailPage";
 import ProfilePage from "./Profile/ProfilePage";
 import CartPage from "./Cart/CartPage";
 import CheckoutPage from "./Checkout/CheckoutPage";
+import OrderSuccess from "./OrderSuccess/OrderSuccess";
 
 import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,7 +30,7 @@ import { getCart } from "../Services/CartRequest";
 import { getAddress } from "../Services/AddressRequest";
 import { getFlashSale } from "../Services/FlashSaleRequest";
 
-import { loginSelector, userInfoSelector, timeNow } from "../Redux/selector";
+import { loginSelector, userInfoSelector } from "../Redux/selector";
 
 const App = () => {
   /** Call to redux */
@@ -52,11 +53,11 @@ const App = () => {
     getBanners(dispatch);
     getCategories(dispatch);
     getStores(dispatch);
-    getProducts(dispatch);
     getSubCategories(dispatch);
     getFlashSale(dispatch).then(() => {
       console.log("Loading success");
     });
+    getProducts(dispatch);
     if (loginCheck?.data != null) {
       getFavorites(user?.id, dispatch, loginCheck?.accessToken);
       getCart(dispatch, loginCheck?.accessToken);
@@ -74,6 +75,7 @@ const App = () => {
           <Route path="/shop/category-:id_category" element={<ShopPage />} />
           <Route path="/auth" element={<AuthenticatePage />} />
           <Route path="/detail/:id" element={<DetailPage />} />
+          <Route path="/success" element={<OrderSuccess />} />
           <Route
             path="/profile"
             element={<ProfilePage loginCheck={loginCheck} />}

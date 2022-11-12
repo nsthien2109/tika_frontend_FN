@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "./DetailTabs.scss";
 import ReviewItem from "../ReviewItem/ReviewItem";
-import { Tabs, Rate } from "antd";
+import { Tabs, Rate, Alert } from "antd";
 import Button from "../Button/Button";
+import { useSelector } from "react-redux";
+import { commentMessageSelector } from "../../Redux/selector";
 
 const { TabPane } = Tabs;
 
 const DetailTabs = (props) => {
+  const [star, setStar] = useState(5);
+  const [commentContent, setCommentContent] = useState();
+  const comments = props.comments;
+  const message = useSelector(commentMessageSelector);
+  const addComment = () => {
+    console.log(star);
+    const commentData = {
+      id_product: props.product?.id_product,
+      star_rate: star,
+      commentContent: commentContent,
+    };
+    props.handleAddComment(commentData);
+  };
   return (
     <div className="detail-tabs">
       <Tabs size="100">
@@ -38,61 +53,31 @@ const DetailTabs = (props) => {
                 1 Review for All Natural Italian-Style Chicken Meatballs
               </h3>
               <div className="review__content-body-list">
-                <ReviewItem
-                  name="Shi Tian"
-                  time="21-09-2019"
-                  rate="5"
-                  comment="This is good coat"
-                />
-                <ReviewItem
-                  name="Cu Shin"
-                  time="22-06-2022"
-                  rate="4"
-                  comment="This is good coat"
-                />
-                <ReviewItem
-                  name="Dau Cat Moi"
-                  time="04-03-2020"
-                  rate="5"
-                  comment="This is good coat"
-                />
-                <ReviewItem
-                  name="Kha Banh"
-                  time="13-02-2018"
-                  rate="3"
-                  comment="This is good coat"
-                />
-                <ReviewItem
-                  name="Kha Banh"
-                  time="13-02-2018"
-                  rate="3"
-                  comment="This is good coat"
-                />
-                <ReviewItem
-                  name="Kha Banh"
-                  time="13-02-2018"
-                  rate="3"
-                  comment="This is good coat"
-                />
-                <ReviewItem
-                  name="Kha Banh"
-                  time="13-02-2018"
-                  rate="3"
-                  comment="This is good coat"
-                />
-                <ReviewItem
-                  name="Kha Banh"
-                  time="13-02-2018"
-                  rate="3"
-                  comment="This is good coat"
-                />
+                {comments?.length > 0 &&
+                  comments?.map((comment) => {
+                    return (
+                      <ReviewItem
+                        key={comment?.id_comment}
+                        name={comment?.lastName}
+                        time="A time ago"
+                        rate={comment?.star_rate}
+                        comment={comment?.commentContent}
+                      />
+                    );
+                  })}
               </div>
             </div>
             <div className="review__content-form">
               <h3 className="review__content-form-label">Add your comment</h3>
+              <Alert
+                message={message ? message : ``}
+                className={message ? `my-5` : "hidden"}
+                showIcon
+                type="success"
+              />
               <div className="review__content-form-rate">
                 <label htmlFor="rate-star">Your rate</label>
-                <Rate id="rate-star" />
+                <Rate id="rate-star" onChange={setStar} />
               </div>
               <div className="review__content-form-write">
                 <label htmlFor="comment_input">Your comment</label>
@@ -100,11 +85,13 @@ const DetailTabs = (props) => {
                   name=""
                   className="review__content-form-input"
                   id="comment_input"
+                  value={commentContent}
+                  onChange={(event) => setCommentContent(event.target.value)}
                   cols="30"
                   placeholder="Write your review here"
                   rows="10"></textarea>
               </div>
-              <Button label="Comment" rounder={true} />
+              <Button label="Comment" onClick={addComment} rounder={true} />
             </div>
           </div>
         </TabPane>

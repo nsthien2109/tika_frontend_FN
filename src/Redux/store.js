@@ -24,6 +24,8 @@ import ProductInfo_Slice from "./Slice/ProductInfo_Slice";
 import Cart_Slice from "../Redux/Slice/Cart_Slice";
 import Address_Slice from "./Slice/Address_Slice";
 import FlashSale_Slice from "./Slice/FlashSale_Slice";
+import Comment_Slice from "./Slice/Comment_Slice";
+import Order_Slice from "./Slice/Order_Slice";
 
 const rootReducer = combineReducers({
   UI: UI_Slice.reducer,
@@ -40,6 +42,8 @@ const rootReducer = combineReducers({
   cart: Cart_Slice.reducer,
   address: Address_Slice.reducer,
   flashsale: FlashSale_Slice.reducer,
+  comments: Comment_Slice.reducer,
+  orders: Order_Slice.reducer,
 });
 
 const persistConfig = {

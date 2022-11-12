@@ -9,10 +9,8 @@ export const addFavorite = async (favoriteData, dispatch, token) => {
       "Content-Type": "multipart/form-data",
       headers: { Authorization: `Bearer ${token}` },
     });
-    console.log(response.data);
     dispatch(Favorite_Slice.actions.addFavoriteSuccess(response.data?.data));
   } catch (error) {
-    console.log(error.response);
     dispatch(Favorite_Slice.actions.addFavoriteFailure(error));
   }
 };
@@ -45,7 +43,9 @@ export const getFavorites = async (id_user, dispatch, token) => {
     });
     dispatch(Favorite_Slice.actions.getAllFavoriteSuccess(response.data));
   } catch (error) {
-    console.log(error.message);
-    dispatch(Favorite_Slice.actions.getAllFavoriteFailure(error));
+    console.log(error.response.data.message);
+    dispatch(
+      Favorite_Slice.actions.getAllFavoriteFailure(error.response.data.message)
+    );
   }
 };

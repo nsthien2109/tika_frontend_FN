@@ -8,12 +8,14 @@ import HomeProducts from "../../Components/HomeProducts/HomeProducts";
 import ProductHorizontal from "../../Components/ProductHorizontal/ProductHorizontal";
 
 /** Import Selector */
+import { flashsaleProduct } from "../../Redux/selector";
 
 const HomePage = (props) => {
+  const flashsales = useSelector(flashsaleProduct);
   return (
     <>
       <SlideShow />
-      <FlashSale />
+      {flashsales?.length > 0 ? <FlashSale flashsales={flashsales} /> : null}
       <SlideCategory setCategory={props.setCategory} />
       <HomeProducts />
     </>

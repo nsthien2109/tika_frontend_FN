@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ProfilePage.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,10 @@ import {
   userInfoSelector,
   favoriteSelector,
   addressSelector,
+  orderSelector,
 } from "../../Redux/selector";
+
+import { getAllOrder } from "../../Services/OrderRequest";
 
 import { updateAddress } from "../../Services/AddressRequest";
 import { updateUser, logout } from "../../Services/AuthRequest";
@@ -22,6 +25,7 @@ const ProfilePage = (props) => {
   const userInfo = useSelector(userInfoSelector);
   const address = useSelector(addressSelector);
   const favorites = useSelector(favoriteSelector);
+  const orders = useSelector(orderSelector);
 
   const handleUpdateAddress = (addressData) => {
     updateAddress(addressData, dispatch, props.loginCheck?.accessToken).then(
@@ -42,6 +46,10 @@ const ProfilePage = (props) => {
       message.success("Logout successfully");
     });
   };
+
+  useEffect(() => {
+    getAllOrder(dispatch, props.loginCheck?.accessToken);
+  }, []);
   return (
     <div className="profile-page">
       <div className="profile-page__container">
@@ -63,7 +71,10 @@ const ProfilePage = (props) => {
           </TabPane>
           <TabPane tab="Orders" key="tab-b">
             <div className="profile-page__order">
-              <OrderItem />
+              {orders?.length > 0 &&
+                orders?.map((order) => {
+                  return <OrderItem key={order.id_order} order={order} />;
+                })}
             </div>
           </TabPane>
           <TabPane tab="Address" key="tab-c">

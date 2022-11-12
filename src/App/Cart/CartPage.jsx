@@ -88,7 +88,7 @@ const CartPage = (props) => {
           <Alert
             message={message ? message : ""}
             className={message ? `mt-4` : "hidden"}
-            type="success"
+            type="error"
             closable
             onClose={onCloseAlert}
           />
@@ -118,8 +118,12 @@ const CartPage = (props) => {
             <div className="value-total">$ {subTotal + 2}</div>
           </div>
           <hr className="my-3" />
-          <Link to="/checkout">
-            <div className="cart-page__total-btn">Proceed to Checkout</div>
+          <Link
+            to="/checkout"
+            className={` ${cartList?.length === 0 ? "hidden" : ""}`}>
+            <button className="cart-page__total-btn">
+              Proceed to Checkout
+            </button>
           </Link>
         </div>
       </div>

@@ -4,10 +4,9 @@ import ProductCard from "../ProductCard/ProductCard";
 import { useSelector } from "react-redux";
 import "./FlashSale.scss";
 import ProductHorizontal from "../ProductHorizontal/ProductHorizontal";
-import { flashsaleProduct } from "../../Redux/selector";
 
 const FlashSale = (props) => {
-  const flashsales = useSelector(flashsaleProduct);
+  const flashsales = props.flashsales;
   const Completionist = () => (
     <span className="countdown-success">You are good to go!</span>
   );
@@ -27,6 +26,7 @@ const FlashSale = (props) => {
     }
   };
 
+  console.log(flashsales);
   return (
     <div className="flashsale">
       <div className="flashsale__container">

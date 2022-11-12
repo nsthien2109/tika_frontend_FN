@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ButtonSizeCheck from "../../Components/ButtonSizeCheck/ButtonSizeCheck";
 import ButtonColorCheck from "../../Components/ButtonColorCheck/ButtonColorCheck";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Checkbox, notification } from "antd";
+import { notification } from "antd";
 import Button from "../../Components/Button/Button";
 import DetailTabs from "../../Components/DetailTabs/DetailTabs";
 import RelatedProduct from "../../Components/RelatedProduct/RelatedProduct";
@@ -21,11 +21,14 @@ import {
   productSizeSelector,
   productColorSelector,
   loginSelector,
+  commentSelector,
 } from "../../Redux/selector";
 import {
   getDetailProduct,
   getImagesProduct,
 } from "../../Services/DetailRequest";
+
+import { getComments, addComment } from "../../Services/CommentRequest";
 
 const DetailPage = (props) => {
   let { id } = useParams();
@@ -34,6 +37,7 @@ const DetailPage = (props) => {
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
   const userData = useSelector(loginSelector);
+  const comments = useSelector(commentSelector);
 
   const handleSizeSelected = (value) => {
     setSizeSelected(value);
@@ -52,6 +56,21 @@ const DetailPage = (props) => {
       setQuantity(1);
     } else {
       setQuantity(quantity - 1);
+    }
+  };
+
+  const handleAddComment = async (commentData) => {
+    if (userData?.accessToken === undefined) {
+      navigate("/auth");
+    } else {
+      await addComment(commentData, dispatch, userData?.accessToken).then(
+        () => {
+          notification["success"]({
+            message: "Commented",
+            description: `You are commented for ${product?.productName}`,
+          });
+        }
+      );
     }
   };
 
@@ -80,6 +99,7 @@ const DetailPage = (props) => {
   useEffect(() => {
     getDetailProduct(id, dispatch);
     getImagesProduct(id, dispatch);
+    getComments(id, dispatch);
   }, []);
 
   const sizes = useSelector(productSizeSelector);
@@ -155,7 +175,7 @@ const DetailPage = (props) => {
                         key={size.id_size}
                         label={size.sizeName}
                         onClick={() => handleSizeSelected(size.id_size)}
-                        selected={size.id_size == sizeSelected ? true : false}
+                        selected={size.id_size === sizeSelected ? true : false}
                       />
                     );
                   })}
@@ -170,7 +190,7 @@ const DetailPage = (props) => {
                         colorHex={`#${color.colorHex}`}
                         onClick={() => handleColorSelected(color.id_color)}
                         selected={
-                          color.id_color == colorSelected ? true : false
+                          color.id_color === colorSelected ? true : false
                         }
                       />
                     );
@@ -237,7 +257,11 @@ const DetailPage = (props) => {
           </div>
         </div>
         <div className="detai-page-description">
-          <DetailTabs product={product} />
+          <DetailTabs
+            product={product}
+            comments={comments}
+            handleAddComment={handleAddComment}
+          />
         </div>
         <div className="detail-page-related">
           <RelatedProduct />

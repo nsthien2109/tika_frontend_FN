@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Filter.scss";
 import { Checkbox, Slider } from "antd";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
@@ -12,6 +12,8 @@ import { subCategorySelected } from "../../Redux/selector";
 
 const Filter = (props) => {
   const dispatch = useDispatch();
+  const [minPrice, setMinPrice] = useState(5);
+  const [maxPrice, setMaxPrice] = useState(100);
   useEffect(() => {
     dispatch(FilterProduct_Slice.actions.filterSubCategoryChange([]));
   }, []);
@@ -31,6 +33,13 @@ const Filter = (props) => {
     }),
   ];
 
+  const onChangePrice = (value: number | [number, number]) => {
+    setMinPrice(value[0]);
+    setMaxPrice(value[1]);
+    dispatch(FilterProduct_Slice.actions.filterStartPriceChange(minPrice));
+    dispatch(FilterProduct_Slice.actions.filterEndPriceChange(maxPrice));
+  };
+
   return (
     <div className="filter">
       <div className="filter__container">
@@ -42,10 +51,18 @@ const Filter = (props) => {
           <h3 className="filter__price-label">Filter by price</h3>
           <div className="filter__price-content">
             <Slider className="invisible" />
-            <Slider range defaultValue={[20, 50]} />
+            <Slider
+              max={500}
+              range
+              defaultValue={[minPrice, maxPrice]}
+              onChange={onChangePrice}
+            />
             <div className="filter__price-content-sub">
               <p className="filter__price-content-sub-text">
-                Price from : <span>$20 - $76</span>
+                Price from :{" "}
+                <span>
+                  ${minPrice} - ${maxPrice}
+                </span>
               </p>
               <div className="filter__price-content-sub-btn">Filter</div>
             </div>

@@ -4,6 +4,7 @@ export default createSlice({
   name: "cart",
   initialState: {
     cart: null,
+    cartDiscount: [],
     coupon: null,
     loading: false,
     success: false,
@@ -14,6 +15,7 @@ export default createSlice({
     resetState: (state) => {
       state.cart = null;
       state.coupon = null;
+      state.cartDiscount = [];
       state.loading = false;
       state.success = false;
       state.error = false;

@@ -18,7 +18,6 @@ const ProductHorizontal = (props) => {
     sliderRef.current.swiper.slideNext();
   }, []);
 
-  console.log(products?.length);
   return (
     <div className="product-horizontal">
       <div className="product-horizontal__container">
